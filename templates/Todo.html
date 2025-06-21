@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <div class="card shadow-lg rounded-4 p-4">
+            <h1 class="text-center mb-4">📝 To-do App</h1>
+
+            
+            <form id="todo-form" class="mb-4" action="/" method="POST">
+                <div class="mb-3">
+                    <input type="text" id="title" class="form-control" name="title" placeholder="Enter task title" required />
+                </div>
+                <div class="mb-3">
+                    <input type="text" id="desc" class="form-control" name="desc" placeholder="Enter task description" required />
+                </div>
+                <button type="submit" class="btn btn-success w-100">Add Task</button>
+            </form>
+
+            
+            <ul id="todo-list" class="list-group mb-4">
+            </ul>
+
+            <!-- Example Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Time Added</th>
+                            <th>Actions</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for todo in todos %}
+                            <tr>
+
+                                <td>{{loop.index}}</td>
+                                <td> {{todo.title}}</td>
+                                <td> {{todo.desc}}</td>
+                                <td> {{todo.time}}</td>
+                                <td>
+                                    <a href="/update/{{ todo.srno }}" class="btn btn-sm btn-primary">Update</a>
+                                    <a href="/delete/{{ todo.srno }}" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>
+
